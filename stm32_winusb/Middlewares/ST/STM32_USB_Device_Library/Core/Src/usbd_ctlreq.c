@@ -181,6 +181,11 @@ USBD_StatusTypeDef USBD_StdItfReq(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef
     case USBD_STATE_ADDRESSED:
     case USBD_STATE_CONFIGURED:
 
+	  if (req->bmRequest == 0xC1 && req->bRequest == winusb_get_vendor_code() && req->wIndex == 0x05) {
+			winusb_get_desc(pdev, req);
+			break;
+	  }
+
       if (LOBYTE(req->wIndex) <= USBD_MAX_NUM_INTERFACES)
       {
         ret = (USBD_StatusTypeDef)pdev->pClass->Setup(pdev, req);
