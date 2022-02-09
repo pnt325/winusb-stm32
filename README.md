@@ -65,14 +65,14 @@ __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 
 Update the USB descriptor as you want to host windows to show it, the name usb to show on windows in this example `stm32 ex winusb`. The `USBD_LANGID_STRING` don't need to change if you are use `English`
 ```C
-#define USBD_VID     					1155
-#define USBD_LANGID_STRING     			1033
-#define USBD_MANUFACTURER_STRING     	"pnt325"
-#define USBD_PID_FS     				12336
-#define USBD_PRODUCT_STRING_FS     		"stm32 ex winusb"
-#define USBD_SERIAL_NUMBER_STRING_FS	"00A"
-#define USBD_CONFIGURATION_STRING_FS    "WINUSB Config"
-#define USBD_INTERFACE_STRING_FS     	"WINUSB Interface"
+#define USBD_VID                      1155
+#define USBD_LANGID_STRING            1033
+#define USBD_MANUFACTURER_STRING      "pnt325"
+#define USBD_PID_FS                   12336
+#define USBD_PRODUCT_STRING_FS        "stm32 ex winusb"
+#define USBD_SERIAL_NUMBER_STRING_FS  "00A"
+#define USBD_CONFIGURATION_STRING_FS  "WINUSB Config"
+#define USBD_INTERFACE_STRING_FS      "WINUSB Interface"
 ```
 
 ## Edit file `usbd_cdc.c`
