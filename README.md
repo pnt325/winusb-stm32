@@ -1,4 +1,4 @@
-# stm32_winusb_example: the example implement on [STM32f746G-DISCO board](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)
+# stm32_winusb_example: The example implement on [STM32f746G-DISCO Board](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)
 
 ## Add component support configuration WINUSB
 The source file `core/winusb/`
@@ -7,15 +7,15 @@ winusb_def.h
 winusb.h
 ```
 
-## Edit file `usbd_config.h`
-Add macro define to use USB_FS
+## File `usbd_config.h`
+Add macro to use USB FS
 ```C
 #define USE_USB_FS		/* define macro to use USB FS*/
 ```
 
-## Edit file `usbd_desc.c`
+## File `usbd_desc.c`
 
-Add macro define USB serial number
+Add macro define USB serial number string
 ```C
 #define USBD_SERIAL_NUMBER_STRING_FS	"00A"
 ```
@@ -34,7 +34,7 @@ uint8_t * USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 }
 ```
 
-Update function `USBD_FS_DeviceDesc`
+Update `USBD_FS_DeviceDesc` data
 ```C
 __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 {
@@ -62,8 +62,7 @@ __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 	USBD_MAX_NUM_CONFIGURATION /*bNumConfigurations*/
 };
 ```
-
-Update the USB descriptor as you want to host windows to show it, the name usb to show on windows in this example `stm32 ex winusb`. The `USBD_LANGID_STRING` don't need to change if you are use `English`
+Update the USB descriptor show on windows when connect
 ```C
 #define USBD_VID                      1155
 #define USBD_LANGID_STRING            1033
@@ -75,14 +74,14 @@ Update the USB descriptor as you want to host windows to show it, the name usb t
 #define USBD_INTERFACE_STRING_FS      "WINUSB Interface"
 ```
 
-## Edit file `usbd_cdc.c`
+## File `usbd_cdc.c`
 
 Add macro `WINUSB_CONFIG_DESC_SIZE`
 ```C
 #define WINUSB_CONFIG_DESC_SIZE           32
 ```
 
-Update the `USBD_CDC_CfgFSDesc`
+Update `USBD_CDC_CfgFSDesc` data
 ```C
 __ALIGN_BEGIN uint8_t USBD_CDC_CfgFSDesc[WINUSB_CONFIG_DESC_SIZE] __ALIGN_END =
 {
@@ -93,7 +92,7 @@ __ALIGN_BEGIN uint8_t USBD_CDC_CfgFSDesc[WINUSB_CONFIG_DESC_SIZE] __ALIGN_END =
   0x00,
   0x01,   							/* bNumInterfaces: 1 interface for Game IO */
   0x01,   							/* bConfigurationValue: Configuration value */
-  USBD_IDX_CONFIG_STR,   			/* iConfiguration: Index of string descriptor describing the configuration */
+  USBD_IDX_CONFIG_STR,  /* iConfiguration: Index of string descriptor describing the configuration */
   0xC0,   							/* bmAttributes: self powered */
   0x32,   							/* MaxPower 0 mA */
 
@@ -130,14 +129,14 @@ __ALIGN_BEGIN uint8_t USBD_CDC_CfgFSDesc[WINUSB_CONFIG_DESC_SIZE] __ALIGN_END =
 } ;
 ```
 
-## Edit file `usbd_ctlreq.c`
+## File `usbd_ctlreq.c`
 
 Include `winusb.h` header
 ```C
 #include "winusb.h"
 ```
 
-Update function `USBD_StdDevReq` inser
+Update function `USBD_StdDevReq` insert code
 
 ```C
 if (req->bmRequest == 0xC0 && req->bRequest == winusb_get_vendor_code()) {
@@ -145,7 +144,7 @@ if (req->bmRequest == 0xC0 && req->bRequest == winusb_get_vendor_code()) {
     return ret;
 }
 ```
-on begin of function like bellow:
+to begin of function:
 ```C
 USBD_StatusTypeDef USBD_StdDevReq(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
@@ -155,18 +154,16 @@ USBD_StatusTypeDef USBD_StdDevReq(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef
 		winusb_get_desc(pdev, req);
 		return ret;
   }
-
-...
+  ...
 ```
 
-Update function `USBD_StdItfReq` add
+Update function `USBD_StdItfReq` insert code bellow to begin of `case USBD_STATE_CONFIGURED:`
 ```C
 if (req->bmRequest == 0xC1 && req->bRequest == winusb_get_vendor_code() && req->wIndex == 0x05) {
     winusb_get_desc(pdev, req);
     break;
 }    
 ```
-to `case USBD_STATE_CONFIGURED:`
 
 Update function `USBD_GetDescriptor` add  `case: 0xEE` bellow `case USBD_IDX_INTERFACE_STR`
 ```C
