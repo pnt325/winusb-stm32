@@ -9,19 +9,19 @@ winusb.h
 
 ## Edit file `usbd_config.h`
 Add macro define to use USB_FS
-```
+```C
 #define USE_USB_FS		/* define macro to use USB FS*/
 ```
 
 ## Edit file `usbd_desc.c`
 
 Add macro define USB serial number
-```
+```C
 #define USBD_SERIAL_NUMBER_STRING_FS	"00A"
 ```
 
 Update the function `USBD_FS_SerialStrDescriptor` to response the `USBD_SERIAL_NUMBER_STRING_FS` value
-```
+```C
 uint8_t * USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
 	UNUSED(speed);
@@ -35,7 +35,7 @@ uint8_t * USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 ```
 
 Update function `USBD_FS_DeviceDesc`
-```
+```C
 __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 {
 	USB_LEN_DEV_DESC, /*bLength */
@@ -64,7 +64,7 @@ __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 ```
 
 Update the USB descriptor as you want to host windows to show it, the name usb to show on windows in this example `stm32 ex winusb`. The `USBD_LANGID_STRING` don't need to change if you are use `English`
-```
+```C
 #define USBD_VID     					1155
 #define USBD_LANGID_STRING     			1033
 #define USBD_MANUFACTURER_STRING     	"pnt325"
@@ -78,12 +78,12 @@ Update the USB descriptor as you want to host windows to show it, the name usb t
 ## Edit file `usbd_cdc.c`
 
 Add macro `WINUSB_CONFIG_DESC_SIZE`
-```
+```C
 #define WINUSB_CONFIG_DESC_SIZE           32
 ```
 
 Update the `USBD_CDC_CfgFSDesc`
-```
+```C
 __ALIGN_BEGIN uint8_t USBD_CDC_CfgFSDesc[WINUSB_CONFIG_DESC_SIZE] __ALIGN_END =
 {
   /*Configuration Descriptor*/
@@ -133,20 +133,20 @@ __ALIGN_BEGIN uint8_t USBD_CDC_CfgFSDesc[WINUSB_CONFIG_DESC_SIZE] __ALIGN_END =
 ## Edit file `usbd_ctlreq.c`
 
 Include `winusb.h` header
-```
+```C
 #include "winusb.h"
 ```
 
 Update function `USBD_StdDevReq` inser
 
-```
+```C
 if (req->bmRequest == 0xC0 && req->bRequest == winusb_get_vendor_code()) {
     winusb_get_desc(pdev, req);
     return ret;
 }
 ```
 on begin of function like bellow:
-```
+```C
 USBD_StatusTypeDef USBD_StdDevReq(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
   USBD_StatusTypeDef ret = USBD_OK;
@@ -160,7 +160,7 @@ USBD_StatusTypeDef USBD_StdDevReq(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef
 ```
 
 Update function `USBD_StdItfReq` add
-```
+```C
 if (req->bmRequest == 0xC1 && req->bRequest == winusb_get_vendor_code() && req->wIndex == 0x05) {
     winusb_get_desc(pdev, req);
     break;
@@ -169,7 +169,7 @@ if (req->bmRequest == 0xC1 && req->bRequest == winusb_get_vendor_code() && req->
 to `case USBD_STATE_CONFIGURED:`
 
 Update function `USBD_GetDescriptor` add  `case: 0xEE` bellow `case USBD_IDX_INTERFACE_STR`
-```
+```C
 case 0xEE:
     pbuf = winusb_get_ms_os_string_desc(&len);
     break;
