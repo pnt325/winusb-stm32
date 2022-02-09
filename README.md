@@ -20,7 +20,7 @@ Add macro define USB serial number
 #define USBD_SERIAL_NUMBER_STRING_FS	"00A"
 ```
 
-Update the function `USBD_FS_SerialStrDescriptor` to response the `USBD_SERIAL_NUMBER_STRING_FS`
+Update the function `USBD_FS_SerialStrDescriptor` to response the `USBD_SERIAL_NUMBER_STRING_FS` value
 ```
 uint8_t * USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
@@ -34,7 +34,7 @@ uint8_t * USBD_FS_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 }
 ```
 
-Update `USBD_FS_DeviceDesc`
+Update function `USBD_FS_DeviceDesc`
 ```
 __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 {
@@ -176,4 +176,10 @@ case 0xEE:
 ```
 
 ## Build and flash to device, plug USB to windows, open windows manager to check if the device show like image bellow that implement success
+
 <img src="image/device_manager.jpg"></img>
+
+## Use usb tools to verify the config and descriptor data
+In this example I use tool [UsbTreeView](https://www.uwe-sieber.de/usbtreeview_e.html)
+
+<img src="image/UsbTreeView.jpg"></img>
