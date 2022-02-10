@@ -193,3 +193,10 @@ Enum
 ```
 Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\enum\usb\vid_0483&PID_3030
 ```
+
+- Connnect to read/write form USB using windows supported winusb_driver the usb device connected to window should know `DeviceInterfaceGUID` on registry
+```
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_0483&PID_3030\001A\Device Parameters
+```
+
+<img src="image/DeviceInterfaceGUID.jpg"></img>
