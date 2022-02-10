@@ -180,3 +180,16 @@ case 0xEE:
 In this example I use tool [UsbTreeView](https://www.uwe-sieber.de/usbtreeview_e.html)
 
 <img src="image/UsbTreeView.jpg"></img>
+
+## Note
+
+- Windows only request MSFT desroptor on the first time device connected. To test device multiple-time should be remove registry data, in this exmaple my device vid = 0483h, pid = 3030h
+
+usbflags
+```
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\control\usbflags\048330300200
+```
+Enum
+```
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\enum\usb\vid_0483&PID_3030
+```
