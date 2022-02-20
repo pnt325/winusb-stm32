@@ -18,12 +18,14 @@ uint8_t winusb_get_vendor_code(void)
 
 uint8_t* winusb_get_ms_os_string_desc(uint16_t* len)
 {
+	printf("[GET] WINUSB_MS_OS_STRING_DESC\n");
 	*len = WINUSB_MS_OS_STRING_DESC_LEN;
 	return (uint8_t*)WINUSB_MS_OS_STRING_DESC;
 }
 
 static uint8_t* winusb_get_compat_id_os_desc(uint16_t* len)
 {
+	printf("[GET] WINUSB_COMPAT_ID_OS_DESC\n");
 	*len = WINUSB_COMPAT_ID_OS_DESC_LEN;
 	return (uint8_t*) WINUSB_COMPAT_ID_OS_DESC;
 }
@@ -39,7 +41,6 @@ void winusb_get_desc(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req) {
 	uint16_t len;
 	uint8_t *pbuf;
 
-	printf("[GET] DESCRIPTOR (%d)\n", req->wIndex);
 	switch (req->wIndex) {
 	case 0x04:
 		pbuf = winusb_get_compat_id_os_desc(&len);
@@ -57,4 +58,3 @@ void winusb_get_desc(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req) {
 		USBD_CtlSendData(pdev, pbuf, len);
 	}
 }
-

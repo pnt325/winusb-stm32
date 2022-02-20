@@ -283,19 +283,19 @@ __ALIGN_BEGIN uint8_t USBD_CDC_CfgFSDesc[WINUSB_CONFIG_DESC_SIZE] __ALIGN_END =
   0x07,   /* bLength: Endpoint Descriptor size */
   USB_DESC_TYPE_ENDPOINT,      			/* bDescriptorType: Endpoint */
   CDC_OUT_EP,                        	/* bEndpointAddress */
-  0x03,                              	/* bmAttributes: interrupt transfer, bulk = 2*/
+  0x02,                              	/* bmAttributes: interrupt transfer, bulk = 2*/
   LOBYTE(CDC_DATA_FS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
   HIBYTE(CDC_DATA_FS_MAX_PACKET_SIZE),
-  0x01,                              	/* bInterval: ignore for Bulk transfer */
+  0x00,                              	/* bInterval: ignore for Bulk transfer */
 
   /*Endpoint IN Descriptor*/
   0x07,   								/* bLength: Endpoint Descriptor size */
   USB_DESC_TYPE_ENDPOINT,      			/* bDescriptorType: Endpoint */
   CDC_IN_EP,                         	/* bEndpointAddress */
-  0x03,                              	/* bmAttributes: interrupt transfer, bulk = 2 */
+  0x02,                              	/* bmAttributes: interrupt transfer, bulk = 2 */
   LOBYTE(CDC_DATA_FS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
   HIBYTE(CDC_DATA_FS_MAX_PACKET_SIZE),
-  0x01                               	/* bInterval: ignore for Bulk transfer */
+  0x00                               	/* bInterval: ignore for Bulk transfer */
 };
 
 __ALIGN_BEGIN static uint8_t USBD_CDC_OtherSpeedCfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_END =

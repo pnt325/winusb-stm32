@@ -1,0 +1,26 @@
+
+Breakpoint=D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/winusb/usb.c:84, State=BP_STATE_DISABLED
+Breakpoint=D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/winusb/usb.c:233:3, State=BP_STATE_DISABLED
+OpenDocument="main.c", FilePath="D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/Src/main.c", Line=124
+OpenDocument="usbd_cdc_if.c", FilePath="D:/Git_Repo/stm32_winusb_example/stm32_winusb/USB_DEVICE/App/usbd_cdc_if.c", Line=277
+OpenDocument="usb_assert.c", FilePath="D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/winusb/usb_assert.c", Line=0
+OpenDocument="buffer.c", FilePath="D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/winusb/buffer.c", Line=33
+OpenDocument="startup_stm32f746nghx.s", FilePath="D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/Startup/startup_stm32f746nghx.s", Line=52
+OpenDocument="usb.c", FilePath="D:/Git_Repo/stm32_winusb_example/stm32_winusb/Core/winusb/usb.c", Line=268
+OpenToolbar="Debug", Floating=0, x=0, y=0
+OpenWindow="Call Stack", DockArea=BOTTOM, x=1, y=0, w=921, h=227, TabPos=1, TopOfStack=0, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Break & Tracepoints", DockArea=BOTTOM, x=1, y=0, w=921, h=227, TabPos=0, TopOfStack=1, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VectorCatchIndexMask=254
+OpenWindow="Global Data", DockArea=RIGHT, x=0, y=0, w=474, h=639, TabPos=2, TopOfStack=0, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Local Data", DockArea=RIGHT, x=0, y=0, w=474, h=639, TabPos=1, TopOfStack=1, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Watched Data 1", DockArea=RIGHT, x=0, y=0, w=474, h=639, TabPos=0, TopOfStack=0, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Console", DockArea=BOTTOM, x=0, y=0, w=432, h=245, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+TableHeader="Call Stack", SortCol="Function", SortOrder="ASCENDING", VisibleCols=["Function";"Stack Frame";"Source";"PC";"Return Address";"Stack Used"], ColWidths=[368;105;100;100;168;100]
+TableHeader="Global Data", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[191;61;100;54;100;100]
+TableHeader="Watched Data 1", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh"], ColWidths=[171;302;100;100]
+TableHeader="Power Sampling", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
+TableHeader="Local Data", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[177;630;113;59;217;100]
+TableHeader="Vector Catches", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Vector Catch";"Description"], ColWidths=[50;300;554]
+TableHeader="Break & Tracepoints", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Type";"Location";"Extras"], ColWidths=[100;100;100;621]
+TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[200;100;100;359]
+WatchedExpression="tx_buf", Window=Watched Data 1
