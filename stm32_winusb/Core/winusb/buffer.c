@@ -99,7 +99,8 @@ bool buffer_get(buffer_t buffer ,uint8_t* data, uint16_t data_size, uint16_t* le
 		}
 
 		//! Copy data
-		data[*len++] = buf->data[buf->tail];
+		data[*len] = buf->data[buf->tail];
+		*len += 1;
 
 		//! remove data from buffer
 		buf->tail = (buf->tail + 1) % buf->size;
