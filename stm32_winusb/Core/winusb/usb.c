@@ -25,7 +25,7 @@ static uint8_t host_sync = 0;	//! Host USB sync or not
 
 //! USB send complete notify
 volatile bool            send_cplt_flag = false;
-static SemaphoreHandle_t send_cplt_notify;			//! USB send complete noitfy
+static SemaphoreHandle_t send_cplt_notify;				//! USB send complete noitfy
 static StaticSemaphore_t _send_cplt_noitfy_buf;
 
 static SemaphoreHandle_t send_mutex;
@@ -53,7 +53,7 @@ static uint8_t usb_pack[USB_PACKET_SIZE];		//! data packet can send each time
 
 //! USB rx task
 #define USB_RX_TASK_NAME			"usb_rx"
-#define USB_RX_TASK_PRI				10
+#define USB_RX_TASK_PRI				16
 #define USB_RX_TASK_STACK_SIZE		configMINIMAL_STACK_SIZE
 static TaskHandle_t usb_rx_task;
 static StaticTask_t usb_rx_task_buf;
@@ -157,6 +157,7 @@ uint8_t usb_send(const uint8_t* data, uint16_t len)
 	//! Make sure host connected
 	if (host_sync == USB_HOST_DISCONNECTED) {
 		ret = USB_SEND_HOST;
+		usb_loge(USB_TAG, "Send failure: USB_HOST_DISCONNECTED");
 		goto send_exit;
 	}
 
@@ -164,6 +165,7 @@ uint8_t usb_send(const uint8_t* data, uint16_t len)
 	uint16_t data_available;
 	if (buffer_available(tx_buf, &data_available) == false) {
 		ret = USB_SEND_BUFFER;
+		usb_loge(USB_TAG, "Send failure: buffer overflow");
 		goto send_exit;
 	}
 
@@ -181,13 +183,15 @@ uint8_t usb_send(const uint8_t* data, uint16_t len)
 	xTaskNotifyGive(usb_tx_task);
 
 	send_exit:
-	//! Release send
-	xSemaphoreGive(send_mutex);
+	xSemaphoreGive(send_mutex);	//! Release send
 
 	return ret;
 }
 
 void usb_recv(const uint8_t* data, uint16_t len) {
+	UBaseType_t uxSavedInterruptStatus;
+	uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+
 	usb_logi(USB_TAG, "[Recv_raw]: len = %d", len);
 
 	//FIXME For test only
@@ -210,10 +214,12 @@ void usb_recv(const uint8_t* data, uint16_t len) {
 		usb_pending_recv = true;
 	}
 
-	//! notify data ready.
+	//! notify rx data ready
 	BaseType_t higher_priority_task_woken;
 	vTaskNotifyGiveFromISR(usb_rx_task, &higher_priority_task_woken);
 	portYIELD_FROM_ISR(higher_priority_task_woken);
+
+	taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }
 
 static void usb_send_issue(void) {
@@ -227,36 +233,27 @@ static void usb_tx_handle(void* param) {
 	uint32_t task_notify;
 
 	for (;;) {
-		//! wait for data available on buffer
+		//! Wait for notify data available
 		task_notify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
-		usb_logi(USB_TAG, "[Task recv] data ready");
+		usb_logi(USB_TAG, "[Task Tx] data ready");
 
 		if (task_notify) {
-			//! Send data
-			uint16_t data_len;
+			uint16_t data_len = 0;
 			do {
-				// Get data
 				buffer_get(tx_buf, usb_pack, sizeof(usb_pack), &data_len);
-				usb_logi(USB_TAG, "[Task recv] Get data: %d", data_len);
+				usb_logi(USB_TAG, "[Task Tx] Get data: %d", data_len);
 
 				if (data_len > 0) {
 					if (CDC_Transmit_FS(usb_pack, data_len) == USBD_OK) {	//! USB transmit success
 						send_cplt_flag = true;
-
-						//! Wait send complete
 						ret = xSemaphoreTake(send_cplt_notify, pdMS_TO_TICKS(USB_SEND_TIMEOUT));
 						if (ret != pdPASS) {
 							send_cplt_flag = false;
-							usb_loge(USB_TAG, "CDC transmit timeout");
-
-							//! Reset buffer and exit send loop
 							usb_send_issue();
+							usb_loge(USB_TAG, "CDC transmit timeout");
 						}
 					} else {	//! USB transmit failure
 						usb_loge(USB_TAG, "CDC transmit failure");
-
-						// Reset buffer and exit send loop
 						usb_send_issue();
 						data_len = 0;
 					}
@@ -275,14 +272,10 @@ static void usb_rx_handle(void* param) {
 	for(;;) {
 		//! Wait data received ready
 		task_notify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
-		//! Data ready received
 		if(task_notify) {
-			uint16_t data_len;
-			uint16_t data_available;
-
+			uint16_t data_len = 0;
+			uint16_t data_available = 0;
 			while(true) {
-				//! Get data
 				if (buffer_get(rx_buf, rx_data_packet_buf, sizeof(rx_data_packet_buf), &data_len) == false) {
 					usb_loge(USB_TAG, "Task Rx get buffer data failure");
 					usb_assert(false);
@@ -298,10 +291,13 @@ static void usb_rx_handle(void* param) {
 					}
 				}
 
-				//! Exit loop.
+				//! Buffer empty exit process loop
 				if(data_len == 0) {
 					break;
 				}
+
+				// FIXME transmit data received
+				usb_send(rx_data_packet_buf, data_len);
 
 				//! parse data received as packet
 				ptc_recv_packet_t* pack;

@@ -22,7 +22,7 @@ enum
 	USB_SEND_FAILURE,		//! Send message failure - USB hardware failure
 	USB_SEND_PARAM,			//! Send message failure - Input parameter invalid
 	USB_SEND_HOST,			//! Send message failure - Host disconnected
-	USB_SEND_BUFFER, 		//! Send message failure - Buffer overflow
+	USB_SEND_BUFFER, 		//! Send message failure - Buffer overflow, data input invalid
 };
 
 enum
