@@ -72,7 +72,7 @@ bool buffer_available(buffer_t buffer ,uint16_t* len) {
 	buffer_typedef_t* buf = (buffer_typedef_t*)buffer;
 
 	buffer_block(buf);
-	if(buf->head > buf->tail) {
+	if(buf->head >= buf->tail) {
 		*len = buf->size - buf->head + buf->tail;
 	} else {
 		*len = buf->tail - buf->head;
