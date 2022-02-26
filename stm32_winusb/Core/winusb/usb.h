@@ -83,4 +83,6 @@ uint8_t usb_host_sync(void);
  */
 void usb_set_host_sync_active(void);
 
+// example commit sync github
+
 #endif /* _USB_H_ */
