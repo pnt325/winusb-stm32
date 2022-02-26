@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/stm32_winusb/Core/Inc",
+                "${workspaceFolder}/stm32_winusb/utils/SEGGER_RTT/RTT",
+                "${workspaceFolder}/stm32_winusb/Core/winusb",
+                "${workspaceFolder}/stm32_winusb/FATFS/Target",
+                "${workspaceFolder}/stm32_winusb/FATFS/App",
+                "${workspaceFolder}/stm32_winusb/Drivers/STM32F7xx_HAL_Driver/Inc",
+                "${workspaceFolder}/stm32_winusb/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/stm32_winusb/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/stm32_winusb/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS",
+                "${workspaceFolder}/stm32_winusb/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1",
+                "${workspaceFolder}/stm32_winusb/Middlewares/Third_Party/FatFs/src",
+                "${workspaceFolder}/stm32_winusb/Drivers/CMSIS/Device/ST/STM32F7xx/Include",
+                "${workspaceFolder}/stm32_winusb/Drivers/CMSIS/Include",
+                "${workspaceFolder}/stm32_winusb/USB_DEVICE/App",
+                "${workspaceFolder}/stm32_winusb/USB_DEVICE/Target",
+                "${workspaceFolder}/stm32_winusb/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "${workspaceFolder}/stm32_winusb/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc"
+
+            ],
+            "defines": [
+                "_DEBUG",
+                "USE_HAL_DRIVER",
+                "STM32F746xx"
+            ],
+            "compilerPath": "C:\\ST\\STM32CubeIDE_1.8.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\\tools\\bin\\arm-none-eabi-gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}
