@@ -1,4 +1,4 @@
-# stm32_winusb_example: The example implement on [STM32f746G-DISCO Board](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)
+# The example implement on [STM32f746G-DISCO Board](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)
 
 ## Add component support configuration WINUSB
 The source file `core/winusb/`
