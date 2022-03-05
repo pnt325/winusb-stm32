@@ -1,0 +1,15 @@
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\bin\Debug\winusb.exe.config
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\bin\Debug\winusb.exe
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\bin\Debug\winusb.pdb
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\bin\Debug\Windows.winmd
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.csproj.AssemblyReference.cache
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.csproj.SuggestedBindingRedirects.cache
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.FrmMain.resources
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.Properties.Resources.resources
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.csproj.GenerateResource.cache
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.csproj.CoreCompileInputs.cache
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.csproj.CopyComplete
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.exe
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.pdb
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\bin\Debug\System.Runtime.WindowsRuntime.dll
+C:\Users\phatn\Documents\Programming\git_repos\stm32_winusb_example\software\winusb\winusb\obj\Debug\winusb.FrmDialog.resources
